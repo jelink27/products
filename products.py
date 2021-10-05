@@ -11,9 +11,9 @@ while True:    #在不知道會執行幾次的時候通常用while
     #p.append(price) #把price裝進p裡面
     #products.append(p) #把p裝進大清單
     products.append([name, price])
-    
-    
-   
+#products[0][0] #第0格的第0格 存取是第一個index的第一個   
     
 print(products) 
-products[0][0] #第0格的第0格 存取是第一個index的第一個
+
+for p in products:
+    print(p[0],'的價格是',p[1]) #每一個清單的第0格
