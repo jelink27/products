@@ -1,6 +1,8 @@
 products = []
 with open('product.csv', 'r', encoding='utf-8') as f:
     for line in f:
+        if '商品,價格' in line:
+            continue
         name, price = line.strip().split(',')  #.strip()去除換行符號， 再用,來切割 讀取先前寫入的檔案 存進name跟price
         products.append([name, price])
 print(products)
