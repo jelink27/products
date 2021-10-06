@@ -1,4 +1,10 @@
 products = []
+with open('product.csv', 'r', encoding='utf-8') as f:
+    for line in f:
+        name, price = line.strip().split(',')  #.strip()去除換行符號， 再用,來切割 讀取先前寫入的檔案 存進name跟price
+        products.append([name, price])
+print(products)
+   
 while True:    #在不知道會執行幾次的時候通常用while
     name = input('請輸入商品名稱：')
     if name == 'q': #quit
@@ -17,7 +23,7 @@ print(products)
 for p in products:
     print(p[0],'的價格是',p[1]) #每一個清單的第0格存名稱 1存價格
 
-with open('product.csv', 'w', encoding='utf-8') as f: #打開這個檔案 寫入product.csv檔 如果沒有會創建 如果有會覆蓋
+with open('product.csv', 'w',encoding='utf-8') as f: #打開這個檔案 寫入product.csv檔 如果沒有會創建 如果有會覆蓋
     f.write('商品,價格\n')
     for p in products:              #with在使用完後會自動關閉，不會夾住檔案
         f.write(p[0] + ',' + str(p[1]) + '\n') #用.write 寫進f裡面 通常最後會用換行做合併 在csv裡面才會換行
