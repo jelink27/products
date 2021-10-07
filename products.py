@@ -1,19 +1,15 @@
 import os #載入operating system
 
+
 #讀取檔案
 def read_file(filename):
     products = []
-    if os.path.isfile(filename): #path模組的isfile功能 檢查檔案在不在
-        print('找到檔案')
-        with open(filename, 'r', encoding='utf-8') as f:
-            for line in f:
-                if '商品,價格' in line:
-                    continue #商品價格出現在line裡面時，跳到下一回
-                name, price = line.strip().split(',')  #.strip()去除換行符號， 再用,來切割 讀取先前寫入的檔案 存進name跟price
-                products.append([name, price])
-                
-    else:
-        print('找不到檔案')
+    with open(filename, 'r', encoding='utf-8') as f:
+                for line in f:
+                    if '商品,價格' in line:
+                        continue #商品價格出現在line裡面時，跳到下一回
+                    name, price = line.strip().split(',')  #.strip()去除換行符號， 再用,來切割 讀取先前寫入的檔案 存進name跟price
+                    products.append([name, price])
     return products
 
 #使用者輸入
@@ -46,7 +42,18 @@ def write_file(filename, products):
             f.write(p[0] + ',' + str(p[1]) + '\n')          #用.write 寫進f裡面 通常最後會用換行做合併 在csv裡面才會換行
                                                             #前面多了把price轉換成數字 數字不能跟字串合併 必須轉換成str字串
 
-products = read_file('products.csv')
-products = user_input(products)
-print_products(products)
-write_file('products.csv', products)
+#主要執行部分
+def main():
+    filename = 'product.csv'
+    if os.path.isfile(filename):
+        print('找到檔案')
+        products = read_file(filename)                
+    else:
+            print('找不到檔案')
+
+    products = read_file('products.csv')
+    products = user_input(products)
+    print_products(products)
+    write_file('products.csv', products)
+#main()
+main()
